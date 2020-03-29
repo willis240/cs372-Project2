@@ -4,14 +4,31 @@
 //main for cs372 project 2
 
 #include <iostream>
-#include <memory>
+using std::cout;
+using std::endl;
+using std::cin;
+
+#include <string>
+using std::getline;
+using std::string;
+
 #include "Shape.hpp"
 
-int main() {
-    std::shared_ptr<Shape> bPtr = std::make_shared<Circle>(2);
+#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_FAST_COMPILE
+#include "catch.hpp"
 
-    auto cPtr = makeCircle(2);
+int main(int argc, char* argv[]) {
 
-    std::cout << "Hello, World!" << std::endl;
+    Catch::Session session;
+    int catchresult;
+
+    catchresult = session.applyCommandLine(argc, argv);
+
+    if (!catchresult) {
+        cout << "Begin tests for class shapes and its derived classes:" << endl;
+        catchresult = session.run();
+        cout << "End of automated tests." << endl;
+    }
     return 0;
 }
