@@ -66,12 +66,12 @@ Circle::Circle(double radius): _radius(radius){}
 
 double Circle::getHeight() const
 {
-	return 0.0;
+	return (2 * _radius);
 }
 
 double Circle::getWidth() const
 {
-	return 0.0;
+	return (2 * _radius);
 }
 
 void Circle::generatePostScript(std::ostream& os) const 
