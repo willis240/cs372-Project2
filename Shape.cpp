@@ -90,7 +90,6 @@ double Polygon::getHeight() const
 		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
 	else if (_numSides % 2 == 0)
 		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
-	return 0.0;
 }
 
 double Polygon::getWidth() const
@@ -101,7 +100,6 @@ double Polygon::getWidth() const
 		return ((_length * cos(M_PI / _numSides)) / sin(M_PI / _numSides));
 	else if (_numSides % 2 == 0)
 		return (_length / sin(M_PI / _numSides));
-	return 0.0;
 }
 
 void Polygon::generatePostScript(std::ostream& os) const
@@ -112,12 +110,12 @@ Rectangle::Rectangle(double width, double height): _width(width), _height(height
 
 double Rectangle::getHeight() const
 {
-	return 0.0;
+	return _height;
 }
 
 double Rectangle::getWidth() const
 {
-	return 0.0;
+	return _width;
 }
 
 void Rectangle::generatePostScript(std::ostream& os) const
@@ -128,12 +126,12 @@ Spacer::Spacer(double width, double height): _width(width), _height(height){}
 
 double Spacer::getHeight() const
 {
-	return 0.0;
+	return _height;
 }
 
 double Spacer::getWidth() const
 {
-	return 0.0;
+	return _width;
 }
 
 void Spacer::generatePostScript(std::ostream& os) const

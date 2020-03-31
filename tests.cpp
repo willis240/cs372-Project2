@@ -98,4 +98,47 @@ TEST_CASE("getHeight and getWidth functions")
 		INFO("10 sides, length 15");
 		REQUIRE(poly6.getWidth() == (15 / sin(M_PI / 10)));
 	}
+
+	Rectangle rect(8, 4);
+	Rectangle rect2(17, 32);
+
+	SECTION("Rectangle getHeight")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(rect.getHeight() == 4);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(rect2.getHeight() == 32);
+	}
+
+	SECTION("Rectangle getWidth")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(rect.getWidth() == 8);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(rect2.getWidth() == 17);
+	}
+
+	Spacer space(8, 4);
+	Spacer space2(17, 32);
+
+	SECTION("Spacer getHeight")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(space.getHeight() == 4);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(space2.getHeight() == 32);
+	}
+
+	SECTION("Spacer getWidth")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(space.getWidth() == 8);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(space2.getWidth() == 17);
+	}
+
 }
