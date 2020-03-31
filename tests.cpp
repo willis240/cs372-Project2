@@ -168,4 +168,45 @@ TEST_CASE("getHeight and getWidth functions")
 		REQUIRE(tri2.getWidth() == (17 * sin(M_PI * (3 - 1.0) / (2.0 * 3))) / sin(M_PI / 3));
 	}
 
+	SECTION("RotatedShape getHeight")
+	{
+		INFO("Rectangle(3, 4), rotated 90 degrees");
+		REQUIRE(RotatedShape(makeRectangle(3, 4), Angle::R90).getHeight() == 3);
+	
+		INFO("Rectangle(3, 4), rotated 270 degrees");
+		REQUIRE(RotatedShape(makeRectangle(3, 4), Angle::R270).getHeight() == 3);
+
+		INFO("Rectangle(3, 4), rotated 180 degrees");
+		REQUIRE(RotatedShape(makeRectangle(3, 4), Angle::R180).getHeight() == 4);
+
+		INFO("Circle(17), rotated 90 degrees");
+		REQUIRE(RotatedShape(makeCircle(17), Angle::R90).getHeight() == 34);
+
+		INFO("Triangle(17, 34), rotated 270 degrees");
+		REQUIRE(RotatedShape(makeTriangle(17), Angle::R270).getHeight() == Triangle(17).getWidth());
+
+		INFO("Rectangle(17, 34), rotated 180 degrees");
+		REQUIRE(RotatedShape(makeRectangle(17, 34), Angle::R180).getHeight() == 34);
+	}
+
+	SECTION("RotatedShape getWidth")
+	{
+		INFO("Rectangle(3, 4), rotated 90 degrees");
+		REQUIRE(RotatedShape(makeRectangle(3, 4), Angle::R90).getWidth() == 4);
+
+		INFO("Rectangle(3, 4), rotated 270 degrees");
+		REQUIRE(RotatedShape(makeRectangle(3, 4), Angle::R270).getWidth() == 4);
+
+		INFO("Rectangle(3, 4), rotated 180 degrees");
+		REQUIRE(RotatedShape(makeRectangle(3, 4), Angle::R180).getWidth() == 3);
+
+		INFO("Circle(17), rotated 90 degrees")
+		REQUIRE(RotatedShape(makeCircle(17), Angle::R90).getWidth() == 34);
+
+		INFO("Triangle(17, 34), rotated 270 degrees");
+		REQUIRE(RotatedShape(makeTriangle(17), Angle::R270).getWidth() == Triangle(17).getHeight());
+
+		INFO("Rectangle(17, 34), rotated 180 degrees");
+		REQUIRE(RotatedShape(makeRectangle(17, 34), Angle::R180).getWidth() == 17);
+	}
 }

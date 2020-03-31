@@ -172,12 +172,18 @@ RotatedShape::RotatedShape(std::shared_ptr<Shape> s, Angle a)
 
 double RotatedShape::getHeight() const
 {
-	return 0.0;
+	if (_a == 90 || _a == 270)
+		return _s->getWidth();
+	if (_a == 180)
+		return _s->getHeight();
 }
 
 double RotatedShape::getWidth() const
 {
-	return 0.0;
+	if (_a == 90 || _a == 270)
+		return _s->getHeight();
+	if (_a == 180)
+		return _s->getWidth();
 }
 
 void RotatedShape::generatePostScript(std::ostream& os) const
