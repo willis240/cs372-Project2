@@ -36,7 +36,7 @@ TEST_CASE("getHeight and getWidth functions")
 	Polygon poly(3, 2);
 	Polygon poly2(5, 2.4);
 
-	SECTION("Polygon getHeight")
+	SECTION("Polygon getHeight: _numSides is odd")
 	{
 		INFO("3 sides, length 2");
 		REQUIRE(poly.getHeight() == 
@@ -47,10 +47,34 @@ TEST_CASE("getHeight and getWidth functions")
 			2.4 * (1 + cos(M_PI / 5)) / (2 * sin(M_PI / 5)));
 	}
 
-	SECTION("Polygon getWidth")
+	SECTION("Polygon getWidth: _numSides is odd")
 	{
 		INFO("3 sides, length 2");
-		REQUIRE(poly.getWidth() == 
-			(2 * sin(M_PI * (3 - 1) / 2 * 3)) / sin(M_PI / 3));
+		REQUIRE(poly.getWidth() == 2);
+
+		INFO("5 sides, length 2.4");
+		REQUIRE(poly2.getWidth() ==
+			(2.4 * sin(M_PI * (5 - 1) / (2 * 5))) / sin(M_PI / 5));
+	}
+
+	Polygon poly3(4, 5);
+	Polygon poly4(16, 20);
+
+	SECTION("Polygon getHeight: _numSides divisible by 4")
+	{
+		INFO("4 sides, length 5");
+		REQUIRE(poly3.getHeight() == (5 * (cos(M_PI / 4))) / sin(M_PI / 4));
+
+		INFO("16 sides, length 20");
+		REQUIRE(poly4.getHeight() == (20 * (cos(M_PI / 16))) / sin(M_PI / 16));
+	}
+
+	SECTION("Polygon getWidth: _numSides divisible by 4")
+	{
+		INFO("4 sides, length 5");
+		REQUIRE(poly3.getWidth() == ((5 * cos(M_PI / 4)) / sin(M_PI / 4)));
+
+		INFO("16 sides, length 20");
+		REQUIRE(poly4.getWidth() == ((20 * cos(M_PI / 16)) / sin(M_PI / 16)));
 	}
 }

@@ -86,13 +86,17 @@ double Polygon::getHeight() const
 {
 	if (_numSides % 2 == 1)
 		return (_length * (1 + cos(M_PI / _numSides))/(2 * sin(M_PI / _numSides)));
+	if (_numSides % 4 == 0)
+		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
 	return 0.0;
 }
 
 double Polygon::getWidth() const
 {
 	if (_numSides % 2 == 1)
-		return ((_length * sin(M_PI * (_numSides - 1) / 2 * _numSides)) / sin(M_PI / _numSides));
+		return ((_length * sin(M_PI * (_numSides - 1.0) / (2.0 * _numSides))) / sin(M_PI / _numSides));
+	if (_numSides % 4 == 0)
+		return ((_length * cos(M_PI / _numSides)) / sin(M_PI / _numSides));
 	return 0.0;
 }
 
