@@ -32,4 +32,25 @@ TEST_CASE("getHeight and getWidth functions")
 		INFO("Radius 103 -> Width 206");
 		REQUIRE(Circle(103).getWidth() == 206);
 	}
+
+	Polygon poly(3, 2);
+	Polygon poly2(5, 2.4);
+
+	SECTION("Polygon getHeight")
+	{
+		INFO("3 sides, length 2");
+		REQUIRE(poly.getHeight() == 
+			2 * (1 + cos(M_PI / 3)) / (2 * sin(M_PI / 3)));
+
+		INFO("5 sides, length 2.4");
+		REQUIRE(poly2.getHeight() ==
+			2.4 * (1 + cos(M_PI / 5)) / (2 * sin(M_PI / 5)));
+	}
+
+	SECTION("Polygon getWidth")
+	{
+		INFO("3 sides, length 2");
+		REQUIRE(poly.getWidth() == 
+			(2 * sin(M_PI * (3 - 1) / 2 * 3)) / sin(M_PI / 3));
+	}
 }

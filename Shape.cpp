@@ -6,6 +6,8 @@
 #include "Shape.hpp"
 
 using std::make_shared;
+using std::cos;
+using std::sin;
 
 std::shared_ptr<Shape> makeCircle(double radius)
 {
@@ -82,11 +84,15 @@ Polygon::Polygon(int numSides, double length): _numSides(numSides), _length(leng
 
 double Polygon::getHeight() const
 {
+	if (_numSides % 2 == 1)
+		return (_length * (1 + cos(M_PI / _numSides))/(2 * sin(M_PI / _numSides)));
 	return 0.0;
 }
 
 double Polygon::getWidth() const
 {
+	if (_numSides % 2 == 1)
+		return ((_length * sin(M_PI * (_numSides - 1) / 2 * _numSides)) / sin(M_PI / _numSides));
 	return 0.0;
 }
 

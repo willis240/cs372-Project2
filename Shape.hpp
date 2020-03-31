@@ -12,6 +12,10 @@
 #include <initializer_list>
 #include <vector>
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <math.h>
+
 class Shape {
 public:
     virtual ~Shape() = default;
