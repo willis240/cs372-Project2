@@ -12,69 +12,248 @@ TEST_CASE("getHeight and getWidth functions")
 	SECTION("Circle getHeight")
 	{
 		INFO("Radius 4 -> Height 8")
-		REQUIRE(Circle(4).getHeight() == 8);
+			REQUIRE(makeCircle(4)->getHeight() == 8);
 
 		INFO("Radius 6 -> Height 12")
-		REQUIRE(Circle(6).getHeight() == 12);
+			REQUIRE(makeCircle(6)->getHeight() == 12);
 
 		INFO("Radius 37 -> Height 74")
-		REQUIRE(Circle(37).getHeight() == 74);
+			REQUIRE(makeCircle(37)->getHeight() == 74);
 	}
 
 	SECTION("Circle getWidth")
 	{
 		INFO("Radius 20 -> Width 40");
-		REQUIRE(Circle(20).getWidth() == 40);
+		REQUIRE(makeCircle(20)->getWidth() == 40);
 
 		INFO("Radius 16 -> Width 32");
-		REQUIRE(Circle(16).getWidth() == 32);
+		REQUIRE(makeCircle(16)->getWidth() == 32);
 
 		INFO("Radius 103 -> Width 206");
-		REQUIRE(Circle(103).getWidth() == 206);
+		REQUIRE(makeCircle(103)->getWidth() == 206);
 	}
+}
 
-	Polygon poly(3, 2);
-	Polygon poly2(5, 2.4);
-
+TEST_CASE("Polygon getHeight and getWidth")
+{
 	SECTION("Polygon getHeight: _numSides is odd")
 	{
 		INFO("3 sides, length 2");
-		REQUIRE(poly.getHeight() == 
+		REQUIRE(makePolygon(3, 2)->getHeight() ==
 			2 * (1 + cos(M_PI / 3)) / (2 * sin(M_PI / 3)));
 
 		INFO("5 sides, length 2.4");
-		REQUIRE(poly2.getHeight() ==
+		REQUIRE(makePolygon(5, 2.4)->getHeight() ==
 			2.4 * (1 + cos(M_PI / 5)) / (2 * sin(M_PI / 5)));
 	}
 
 	SECTION("Polygon getWidth: _numSides is odd")
 	{
 		INFO("3 sides, length 2");
-		REQUIRE(poly.getWidth() == 2);
+		REQUIRE(makePolygon(3, 2)->getWidth() == 2);
 
 		INFO("5 sides, length 2.4");
-		REQUIRE(poly2.getWidth() ==
+		REQUIRE(makePolygon(5, 2.4)->getWidth() ==
 			(2.4 * sin(M_PI * (5 - 1) / (2 * 5))) / sin(M_PI / 5));
 	}
-
-	Polygon poly3(4, 5);
-	Polygon poly4(16, 20);
 
 	SECTION("Polygon getHeight: _numSides divisible by 4")
 	{
 		INFO("4 sides, length 5");
-		REQUIRE(poly3.getHeight() == (5 * (cos(M_PI / 4))) / sin(M_PI / 4));
+		REQUIRE(makePolygon(4, 5)->getHeight() == (5 * (cos(M_PI / 4))) / sin(M_PI / 4));
 
 		INFO("16 sides, length 20");
-		REQUIRE(poly4.getHeight() == (20 * (cos(M_PI / 16))) / sin(M_PI / 16));
+		REQUIRE(makePolygon(16, 20)->getHeight() == (20 * (cos(M_PI / 16))) / sin(M_PI / 16));
 	}
 
 	SECTION("Polygon getWidth: _numSides divisible by 4")
 	{
 		INFO("4 sides, length 5");
-		REQUIRE(poly3.getWidth() == ((5 * cos(M_PI / 4)) / sin(M_PI / 4)));
+		REQUIRE(makePolygon(4, 5)->getWidth() == ((5 * cos(M_PI / 4)) / sin(M_PI / 4)));
 
 		INFO("16 sides, length 20");
-		REQUIRE(poly4.getWidth() == ((20 * cos(M_PI / 16)) / sin(M_PI / 16)));
+		REQUIRE(makePolygon(16, 20)->getWidth() == ((20 * cos(M_PI / 16)) / sin(M_PI / 16)));
+	}
+
+	SECTION("Polygon getHeight: _numSides divisible by 2, but not 4")
+	{
+		INFO("6 sides, length 7");
+		REQUIRE(makePolygon(6, 7)->getHeight() == (7 * cos(M_PI / 6) / sin(M_PI / 6)));
+
+		INFO("10 sides, length 15");
+		REQUIRE(makePolygon(10, 15)->getHeight() == (15 * cos(M_PI / 10) / sin(M_PI / 10)));
+	}
+
+	SECTION("Polygon getWidth: _numSides divisible by 2, but not 4")
+	{
+		INFO("6 sides, length 7");
+		REQUIRE(makePolygon(6, 7)->getWidth() == (7 / sin(M_PI / 6)));
+
+		INFO("10 sides, length 15");
+		REQUIRE(makePolygon(10, 15)->getWidth() == (15 / sin(M_PI / 10)));
 	}
 }
+
+TEST_CASE("Rectangle getHeight and getWidth")
+{
+	SECTION("Rectangle getHeight")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(makeRectangle(8, 4)->getHeight() == 4);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(makeRectangle(17, 32)->getHeight() == 32);
+	}
+
+	SECTION("Rectangle getWidth")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(makeRectangle(8, 4)->getWidth() == 8);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(makeRectangle(17, 32)->getWidth() == 17);
+	}
+}
+
+TEST_CASE("Spacer getHeight and getWidth")
+{
+	SECTION("Spacer getHeight")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(makeSpacer(8, 4)->getHeight() == 4);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(makeSpacer(17, 32)->getHeight() == 32);
+	}
+
+	SECTION("Spacer getWidth")
+	{
+		INFO("Width 8, Height 4");
+		REQUIRE(makeSpacer(8, 4)->getWidth() == 8);
+
+		INFO("Width 17, Height 32");
+		REQUIRE(makeSpacer(17, 32)->getWidth() == 17);
+	}
+}
+
+TEST_CASE("Triangle getHeight and getWidth")
+{
+	SECTION("Triangle getHeight")
+	{
+		INFO("Length 4");
+		REQUIRE(makeTriangle(4)->getHeight() == 4 * (1 + cos(M_PI / 3)) / (2 * sin(M_PI / 3)));
+
+		INFO("Triangle(4) == Polygon(3, 4)");
+		REQUIRE(makeTriangle(4)->getHeight() == Polygon(3, 4).getHeight());
+
+		INFO("Length 17");
+		REQUIRE(makeTriangle(17)->getHeight() == 17 * (1 + cos(M_PI / 3)) / (2 * sin(M_PI / 3)));
+	}
+
+	SECTION("Triangle getWidth")
+	{
+		INFO("Length 4");
+		REQUIRE(makeTriangle(4)->getWidth() == (4 * sin(M_PI * (3 - 1.0) / (2.0 * 3))) / sin(M_PI / 3));
+
+		INFO("Triangle(4) == Polygon(3, 4)");
+		REQUIRE(makeTriangle(4)->getWidth() == Polygon(3, 4).getWidth());
+
+		INFO("Length 17");
+		REQUIRE(makeTriangle(17)->getWidth() == (17 * sin(M_PI * (3 - 1.0) / (2.0 * 3))) / sin(M_PI / 3));
+	}
+}
+
+TEST_CASE("RotatedShape getHeight and getWidth")
+{
+	SECTION("RotatedShape getHeight")
+	{
+		INFO("Rectangle(3, 4), rotated 90 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(3, 4), Angle::R90)->getHeight() == 3);
+
+		INFO("Rectangle(3, 4), rotated 270 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(3, 4), Angle::R270)->getHeight() == 3);
+
+		INFO("Rectangle(3, 4), rotated 180 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(3, 4), Angle::R180)->getHeight() == 4);
+
+		INFO("Circle(17), rotated 90 degrees");
+		REQUIRE(makeRotatedShape(makeCircle(17), Angle::R90)->getHeight() == 34);
+
+		INFO("Triangle(17, 34), rotated 270 degrees");
+		REQUIRE(makeRotatedShape(makeTriangle(17), Angle::R270)->getHeight() == 
+			makeTriangle(17)->getWidth());
+
+		INFO("Rectangle(17, 34), rotated 180 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(17, 34), Angle::R180)->getHeight() == 34);
+	}
+
+	SECTION("RotatedShape getWidth")
+	{
+		INFO("Rectangle(3, 4), rotated 90 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(3, 4), Angle::R90)->getWidth() == 4);
+
+		INFO("Rectangle(3, 4), rotated 270 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(3, 4), Angle::R270)->getWidth() == 4);
+
+		INFO("Rectangle(3, 4), rotated 180 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(3, 4), Angle::R180)->getWidth() == 3);
+
+		INFO("Circle(17), rotated 90 degrees")
+			REQUIRE(makeRotatedShape(makeCircle(17), Angle::R90)->getWidth() == 34);
+
+		INFO("Triangle(17, 34), rotated 270 degrees");
+		REQUIRE(makeRotatedShape(makeTriangle(17), Angle::R270)->getWidth() == 
+			makeTriangle(17)->getHeight());
+
+		INFO("Rectangle(17, 34), rotated 180 degrees");
+		REQUIRE(makeRotatedShape(makeRectangle(17, 34), Angle::R180)->getWidth() == 17);
+	}
+}
+
+/*
+	SECTION("ScaledShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("ScaledShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("LayeredShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("LayeredShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("LayeredShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("VerticalShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("VerticalShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("HorizontalShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("HorizontalShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+}
+*/

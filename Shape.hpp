@@ -28,7 +28,7 @@ std::shared_ptr<Shape> makeCircle(double radius);
 std::shared_ptr<Shape> makePolygon(int numSides, double length);
 std::shared_ptr<Shape> makeRectangle(double width, double height);
 std::shared_ptr<Shape> makeSpacer(double width, double height); 
-std::shared_ptr<Shape> makeSquare(double length); //is really a a rectangle
+std::shared_ptr<Shape> makeSquare(double length); //is really a rectangle
 std::shared_ptr<Shape> makeTriangle(double length);
 enum class Angle { R90, R180, R270 };
 std::shared_ptr<Shape> makeRotatedShape(std::shared_ptr<Shape> s, Angle a);

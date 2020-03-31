@@ -88,7 +88,8 @@ double Polygon::getHeight() const
 		return (_length * (1 + cos(M_PI / _numSides))/(2 * sin(M_PI / _numSides)));
 	if (_numSides % 4 == 0)
 		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
-	return 0.0;
+	else if (_numSides % 2 == 0)
+		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
 }
 
 double Polygon::getWidth() const
@@ -97,7 +98,8 @@ double Polygon::getWidth() const
 		return ((_length * sin(M_PI * (_numSides - 1.0) / (2.0 * _numSides))) / sin(M_PI / _numSides));
 	if (_numSides % 4 == 0)
 		return ((_length * cos(M_PI / _numSides)) / sin(M_PI / _numSides));
-	return 0.0;
+	else if (_numSides % 2 == 0)
+		return (_length / sin(M_PI / _numSides));
 }
 
 void Polygon::generatePostScript(std::ostream& os) const
@@ -108,12 +110,12 @@ Rectangle::Rectangle(double width, double height): _width(width), _height(height
 
 double Rectangle::getHeight() const
 {
-	return 0.0;
+	return _height;
 }
 
 double Rectangle::getWidth() const
 {
-	return 0.0;
+	return _width;
 }
 
 void Rectangle::generatePostScript(std::ostream& os) const
@@ -124,12 +126,12 @@ Spacer::Spacer(double width, double height): _width(width), _height(height){}
 
 double Spacer::getHeight() const
 {
-	return 0.0;
+	return _height;
 }
 
 double Spacer::getWidth() const
 {
-	return 0.0;
+	return _width;
 }
 
 void Spacer::generatePostScript(std::ostream& os) const
@@ -140,12 +142,12 @@ Triangle::Triangle(double length): _length(length){}
 
 double Triangle::getHeight() const
 {
-	return 0.0;
+	return Polygon(3, _length).getHeight();
 }
 
 double Triangle::getWidth() const
 {
-	return 0.0;
+	return Polygon(3, _length).getWidth();
 }
 
 void Triangle::generatePostScript(std::ostream& os) const
@@ -170,12 +172,18 @@ RotatedShape::RotatedShape(std::shared_ptr<Shape> s, Angle a)
 
 double RotatedShape::getHeight() const
 {
-	return 0.0;
+	if (_a == 90 || _a == 270)
+		return _s->getWidth();
+	if (_a == 180)
+		return _s->getHeight();
 }
 
 double RotatedShape::getWidth() const
 {
-	return 0.0;
+	if (_a == 90 || _a == 270)
+		return _s->getHeight();
+	if (_a == 180)
+		return _s->getWidth();
 }
 
 void RotatedShape::generatePostScript(std::ostream& os) const
@@ -188,12 +196,12 @@ ScaledShape::ScaledShape(std::shared_ptr<Shape> s, double sx, double sy)//TODO *
 
 double ScaledShape::getHeight() const
 {
-	return 0.0;
+	return (_s->getHeight() * _sy);
 }
 
 double ScaledShape::getWidth() const
 {
-	return 0.0;
+	return (_s->getWidth() * _sx);
 }
 
 void ScaledShape::generatePostScript(std::ostream& os) const
