@@ -77,4 +77,25 @@ TEST_CASE("getHeight and getWidth functions")
 		INFO("16 sides, length 20");
 		REQUIRE(poly4.getWidth() == ((20 * cos(M_PI / 16)) / sin(M_PI / 16)));
 	}
+
+	Polygon poly5(6, 7);
+	Polygon poly6(10, 15);
+
+	SECTION("Polygon getHeight: _numSides divisible by 2, but not 4")
+	{
+		INFO("6 sides, length 7");
+		REQUIRE(poly5.getHeight() == (7 * cos(M_PI / 6) / sin(M_PI / 6)));
+
+		INFO("10 sides, length 15");
+		REQUIRE(poly6.getHeight() == (15 * cos(M_PI / 10) / sin(M_PI / 10)));
+	}
+
+	SECTION("Polygon getWidth: _numSides divisible by 2, but not 4")
+	{
+		INFO("6 sides, length 7");
+		REQUIRE(poly5.getWidth() == (7 / sin(M_PI / 6)));
+
+		INFO("10 sides, length 15");
+		REQUIRE(poly6.getWidth() == (15 / sin(M_PI / 10)));
+	}
 }
