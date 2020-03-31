@@ -142,12 +142,12 @@ Triangle::Triangle(double length): _length(length){}
 
 double Triangle::getHeight() const
 {
-	return 0.0;
+	return Polygon(3, _length).getHeight();
 }
 
 double Triangle::getWidth() const
 {
-	return 0.0;
+	return Polygon(3, _length).getWidth();
 }
 
 void Triangle::generatePostScript(std::ostream& os) const

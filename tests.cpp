@@ -141,4 +141,31 @@ TEST_CASE("getHeight and getWidth functions")
 		REQUIRE(space2.getWidth() == 17);
 	}
 
+	Triangle tri(4);
+	Triangle tri2(17);
+
+	SECTION("Triangle getHeight")
+	{
+		INFO("Length 4");
+		REQUIRE(tri.getHeight() == 4 * (1 + cos(M_PI / 3)) / (2 * sin(M_PI / 3)));
+
+		INFO("Triangle(4) == Polygon(3, 4)");
+		REQUIRE(tri.getHeight() == Polygon(3, 4).getHeight());
+
+		INFO("Length 17");
+		REQUIRE(tri2.getHeight() == 17 * (1 + cos(M_PI / 3)) / (2 * sin(M_PI / 3)));
+	}
+
+	SECTION("Triangle getWidth")
+	{
+		INFO("Length 4");
+		REQUIRE(tri.getWidth() == (4 * sin(M_PI * (3 - 1.0) / (2.0 * 3))) / sin(M_PI / 3));
+
+		INFO("Triangle(4) == Polygon(3, 4)");
+		REQUIRE(tri.getWidth() == Polygon(3, 4).getWidth());
+
+		INFO("Length 17");
+		REQUIRE(tri2.getWidth() == (17 * sin(M_PI * (3 - 1.0) / (2.0 * 3))) / sin(M_PI / 3));
+	}
+
 }
