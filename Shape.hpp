@@ -33,9 +33,9 @@ std::shared_ptr<Shape> makeTriangle(double length);
 enum class Angle { R90, R180, R270 };
 std::shared_ptr<Shape> makeRotatedShape(std::shared_ptr<Shape> s, Angle a);
 std::shared_ptr<Shape> makeScaledShape(std::shared_ptr<Shape> s, double sx, double sy);
-std::shared_ptr<Shape> makeLayeredShape(std::initializer_list<Shape> i);
-std::shared_ptr<Shape> makeVerticalShape(std::initializer_list<Shape> i);
-std::shared_ptr<Shape> makeHorizontalShape(std::initializer_list<Shape> i);
+std::shared_ptr<Shape> makeLayeredShape(std::initializer_list<std::shared_ptr<Shape>> i);
+std::shared_ptr<Shape> makeVerticalShape(std::initializer_list<std::shared_ptr<Shape>> i);
+std::shared_ptr<Shape> makeHorizontalShape(std::initializer_list<std::shared_ptr<Shape>> i);
 
 class Circle : public Shape {
 public:
@@ -115,7 +115,7 @@ private:
 
 class LayeredShape : public Shape {
 public:
-    LayeredShape(std::initializer_list<Shape> i);
+    LayeredShape(std::initializer_list<std::shared_ptr<Shape>> i);
     double getHeight() const override;
     double getWidth() const override;
     void generatePostScript(std::ostream& os) const override;

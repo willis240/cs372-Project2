@@ -8,6 +8,9 @@
 using std::make_shared;
 using std::cos;
 using std::sin;
+using std::initializer_list;
+using std::vector;
+using std::shared_ptr;
 
 std::shared_ptr<Shape> makeCircle(double radius)
 {
@@ -190,9 +193,7 @@ void RotatedShape::generatePostScript(std::ostream& os) const
 {
 }
 
-ScaledShape::ScaledShape(std::shared_ptr<Shape> s, double sx, double sy)//TODO ********************************************************
-{
-}
+ScaledShape::ScaledShape(std::shared_ptr<Shape> s, double sx, double sy): _s(s), _sx(sx), _sy(sy){}
 
 double ScaledShape::getHeight() const
 {
@@ -208,8 +209,10 @@ void ScaledShape::generatePostScript(std::ostream& os) const
 {
 }
 
-LayeredShape::LayeredShape(std::initializer_list<Shape> i)//TODO ********************************************************
+LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
 {
+	vector<shared_ptr<Shape>> temp{ i.begin(),i.end() };
+	_shapes = temp;
 }
 
 double LayeredShape::getHeight() const
@@ -226,8 +229,10 @@ void LayeredShape::generatePostScript(std::ostream& os) const
 {
 }
 
-VerticalShape::VerticalShape(std::initializer_list<Shape> i)//TODO ********************************************************
+VerticalShape::VerticalShape(initializer_list<Shape> i)
 {
+	vector<shared_ptr<Shape>> temp{ i.begin(),i.end() };
+	_shapes = temp;
 }
 
 double VerticalShape::getHeight() const
@@ -244,8 +249,10 @@ void VerticalShape::generatePostScript(std::ostream& os) const
 {
 }
 
-HorizontalShape::HorizontalShape(std::initializer_list<Shape> i)//TODO ********************************************************
+HorizontalShape::HorizontalShape(initializer_list<Shape> i)
 {
+	vector<shared_ptr<Shape>> temp{ i.begin(),i.end() };
+	_shapes = temp;
 }
 
 double HorizontalShape::getHeight() const
