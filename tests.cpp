@@ -209,4 +209,49 @@ TEST_CASE("getHeight and getWidth functions")
 		INFO("Rectangle(17, 34), rotated 180 degrees");
 		REQUIRE(RotatedShape(makeRectangle(17, 34), Angle::R180).getWidth() == 17);
 	}
+
+	SECTION("ScaledShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("ScaledShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("LayeredShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("LayeredShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("LayeredShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("VerticalShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("VerticalShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("HorizontalShape getHeight")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	SECTION("HorizontalShape getWidth")
+	{
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
 }

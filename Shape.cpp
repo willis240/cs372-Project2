@@ -196,12 +196,12 @@ ScaledShape::ScaledShape(std::shared_ptr<Shape> s, double sx, double sy)//TODO *
 
 double ScaledShape::getHeight() const
 {
-	return 0.0;
+	return (_s->getHeight() * _sy);
 }
 
 double ScaledShape::getWidth() const
 {
-	return 0.0;
+	return (_s->getWidth() * _sx);
 }
 
 void ScaledShape::generatePostScript(std::ostream& os) const
