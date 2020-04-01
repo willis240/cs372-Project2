@@ -125,7 +125,7 @@ private:
 
 class VerticalShape : public Shape {
 public:
-    VerticalShape(std::initializer_list<Shape> i);
+    VerticalShape(std::initializer_list<std::shared_ptr<Shape>> i);
     double getHeight() const override;
     double getWidth() const override;
     void generatePostScript(std::ostream& os) const override;
@@ -135,7 +135,7 @@ private:
 
 class HorizontalShape : public Shape {
 public:
-    HorizontalShape(std::initializer_list<Shape> i);
+    HorizontalShape(std::initializer_list<std::shared_ptr<Shape>> i);
     double getHeight() const override;
     double getWidth() const override;
     void generatePostScript(std::ostream& os) const override;

@@ -211,8 +211,7 @@ void ScaledShape::generatePostScript(std::ostream& os) const
 
 LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
 {
-	vector<shared_ptr<Shape>> temp{ i.begin(),i.end() };
-	_shapes = temp;
+	vector<shared_ptr<Shape>> temp(i.begin(), i.end());
 }
 
 double LayeredShape::getHeight() const
@@ -229,10 +228,9 @@ void LayeredShape::generatePostScript(std::ostream& os) const
 {
 }
 
-VerticalShape::VerticalShape(initializer_list<Shape> i)
+VerticalShape::VerticalShape(initializer_list<shared_ptr<Shape>> i)
 {
-	vector<shared_ptr<Shape>> temp{ i.begin(),i.end() };
-	_shapes = temp;
+	vector<shared_ptr<Shape>> temp(i.begin(), i.end());
 }
 
 double VerticalShape::getHeight() const
@@ -249,9 +247,9 @@ void VerticalShape::generatePostScript(std::ostream& os) const
 {
 }
 
-HorizontalShape::HorizontalShape(initializer_list<Shape> i)
+HorizontalShape::HorizontalShape(initializer_list<shared_ptr<Shape>> i)
 {
-	vector<shared_ptr<Shape>> temp{ i.begin(),i.end() };
+	vector<shared_ptr<Shape>> temp(i.begin(), i.end());
 	_shapes = temp;
 }
 
