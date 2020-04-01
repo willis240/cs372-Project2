@@ -52,17 +52,17 @@ std::shared_ptr<Shape> makeScaledShape(std::shared_ptr<Shape> s, double sx, doub
 	return make_shared<ScaledShape>(s, sx, sy);
 }
 
-std::shared_ptr<Shape> makeLayeredShape(std::initializer_list<Shape> i)
+std::shared_ptr<Shape> makeLayeredShape(std::initializer_list<std::shared_ptr<Shape>> i)
 {
 	return make_shared<LayeredShape>(i);
 }
 
-std::shared_ptr<Shape> makeVerticalShape(std::initializer_list<Shape> i)
+std::shared_ptr<Shape> makeVerticalShape(std::initializer_list<std::shared_ptr<Shape>> i)
 {
 	return make_shared<VerticalShape>(i);
 }
 
-std::shared_ptr<Shape> makeHorizontalShape(std::initializer_list<Shape> i)
+std::shared_ptr<Shape> makeHorizontalShape(std::initializer_list<std::shared_ptr<Shape>> i)
 {
 	return make_shared<HorizontalShape>(i);
 }
@@ -91,8 +91,10 @@ double Polygon::getHeight() const
 		return (_length * (1 + cos(M_PI / _numSides))/(2 * sin(M_PI / _numSides)));
 	if (_numSides % 4 == 0)
 		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
-	else if (_numSides % 2 == 0)
+	if (_numSides % 2 == 0)
 		return (_length * (cos(M_PI / _numSides)) / sin(M_PI / _numSides));
+	
+	return 0.0;
 }
 
 double Polygon::getWidth() const
@@ -101,8 +103,10 @@ double Polygon::getWidth() const
 		return ((_length * sin(M_PI * (_numSides - 1.0) / (2.0 * _numSides))) / sin(M_PI / _numSides));
 	if (_numSides % 4 == 0)
 		return ((_length * cos(M_PI / _numSides)) / sin(M_PI / _numSides));
-	else if (_numSides % 2 == 0)
+	if (_numSides % 2 == 0)
 		return (_length / sin(M_PI / _numSides));
+
+	return 0.0;
 }
 
 void Polygon::generatePostScript(std::ostream& os) const
@@ -179,6 +183,8 @@ double RotatedShape::getHeight() const
 		return _s->getWidth();
 	if (_a == 180)
 		return _s->getHeight();
+
+	return 0.0;
 }
 
 double RotatedShape::getWidth() const
@@ -187,6 +193,8 @@ double RotatedShape::getWidth() const
 		return _s->getHeight();
 	if (_a == 180)
 		return _s->getWidth();
+
+	return 0.0;
 }
 
 void RotatedShape::generatePostScript(std::ostream& os) const
@@ -212,6 +220,7 @@ void ScaledShape::generatePostScript(std::ostream& os) const
 LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
 {
 	vector<shared_ptr<Shape>> temp(i.begin(), i.end());
+	_shapes = temp;
 }
 
 double LayeredShape::getHeight() const
@@ -231,6 +240,7 @@ void LayeredShape::generatePostScript(std::ostream& os) const
 VerticalShape::VerticalShape(initializer_list<shared_ptr<Shape>> i)
 {
 	vector<shared_ptr<Shape>> temp(i.begin(), i.end());
+	_shapes = temp;
 }
 
 double VerticalShape::getHeight() const
