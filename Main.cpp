@@ -1,5 +1,5 @@
 //main.cpp
-//Blake Caldwell, William Fisher, Kaleeb _________
+//Blake Caldwell, William Fisher, Kaleeb Palmieri
 //March 27, 2020
 //main for cs372 project 2
 

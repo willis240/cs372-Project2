@@ -30,6 +30,7 @@ std::shared_ptr<Shape> makeRectangle(double width, double height);
 std::shared_ptr<Shape> makeSpacer(double width, double height); 
 std::shared_ptr<Shape> makeSquare(double length); //is really a rectangle
 std::shared_ptr<Shape> makeTriangle(double length);
+std::shared_ptr<Shape> makeCustom(double radius);       // Acts like circle
 enum class Angle { R90, R180, R270 };
 std::shared_ptr<Shape> makeRotatedShape(std::shared_ptr<Shape> s, Angle a);
 std::shared_ptr<Shape> makeScaledShape(std::shared_ptr<Shape> s, double sx, double sy);
@@ -88,6 +89,16 @@ public:
     void generatePostScript(std::ostream& os) const override;
 private:
     double _length;
+};
+
+class Custom : public Shape {
+public:
+    Custom(double radius);
+    double getHeight() const override;
+    double getWidth() const override;
+    void generatePostScript(std::ostream& os) const override;
+private:
+    double _radius;
 };
 
 class RotatedShape : public Shape {
