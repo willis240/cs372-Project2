@@ -1,5 +1,5 @@
 //Shape.cpp
-//Blake Caldwell, William Fisher, Kaleeb _________
+//Blake Caldwell, William Fisher, Kaleeb Palmieri
 //March 27, 2020
 //class and function definitions for shape.hpp
 
@@ -38,6 +38,12 @@ std::shared_ptr<Shape> makeTriangle(double length)
 {
 	return make_shared<Triangle>(length);
 }
+
+std::shared_ptr<Shape> makeCustom(double radius)
+{
+    return make_shared<Custom>(radius);
+}
+
 
 std::shared_ptr<Shape> makeRotatedShape(std::shared_ptr<Shape> s, Angle a)
 {
@@ -154,6 +160,42 @@ void Triangle::generatePostScript(std::ostream& os) const
 {
 }
 
+Custom::Custom(double radius): _radius(radius){}
+
+double Custom::getHeight() const
+{
+    return (2 * _radius);
+}
+
+double Custom::getWidth() const
+{
+    return (2 * _radius);
+}
+
+void Custom::generatePostScript(std::ostream& os) const
+{
+    os<<"/rad " << _radius << " def\n"
+        "/-rad rad -1 mul def\n"
+        "/val_1 0.86602540378 rad mul def\n"
+        "/val_2 0.5 rad mul def\n"
+        "/-val_1 val_1 -1 mul def\n"
+        "/-val_2 val_2 -1 mul def"
+        "rad rad rad 0 360 arc                 %starting complete circle\n"
+        "stroke\n"
+        "rad rad rad add rad 210 330 arc\n"
+        "stroke\n"
+        "rad rad -rad add rad 30 150 arc\n"
+        "stroke\n"
+        "rad val_1 add rad val_2 add rad 150 270 arc\n"
+        "stroke\n"
+        "rad -val_1 add rad val_2 add rad 270 30 arc\n"
+        "stroke\n"
+        "rad val_1 add rad -val_2 add rad 90 210 arc\n"
+        "stroke\n"
+        "rad -val_1 add rad -val_2 add rad 330 90 arc\n"
+        "stroke";
+}
+
 RotatedShape::RotatedShape(std::shared_ptr<Shape> s, Angle a)
 {
 	_s = s;
@@ -261,3 +303,5 @@ double HorizontalShape::getWidth() const
 void HorizontalShape::generatePostScript(std::ostream& os) const
 {
 }
+
+
