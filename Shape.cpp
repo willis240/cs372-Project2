@@ -227,8 +227,6 @@ double RotatedShape::getHeight() const
 		return _s->getWidth();
 	if (_a == 180)
 		return _s->getHeight();
-
-	return 0.0;
 }
 
 double RotatedShape::getWidth() const
@@ -237,8 +235,6 @@ double RotatedShape::getWidth() const
 		return _s->getHeight();
 	if (_a == 180)
 		return _s->getWidth();
-
-	return 0.0;
 }
 
 void RotatedShape::generatePostScript(std::ostream& os) const
@@ -269,12 +265,24 @@ LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
 
 double LayeredShape::getHeight() const
 {
-	return 0.0;
+	double maxHeight = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getHeight() > maxHeight)
+			maxHeight = i->getHeight();
+	}
+	return maxHeight;
 }
 
 double LayeredShape::getWidth() const
 {
-	return 0.0;
+	double maxWidth = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getWidth() > maxWidth)
+			maxWidth = i->getWidth();
+	}
+	return maxWidth;
 }
 
 void LayeredShape::generatePostScript(std::ostream& os) const
@@ -289,12 +297,23 @@ VerticalShape::VerticalShape(initializer_list<shared_ptr<Shape>> i)
 
 double VerticalShape::getHeight() const
 {
-	return 0.0;
+	double totalHeight = 0;
+	for (auto i : _shapes)
+	{
+		totalHeight += i->getHeight();
+	}
+	return totalHeight;
 }
 
 double VerticalShape::getWidth() const
 {
-	return 0.0;
+	double maxWidth = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getWidth() > maxWidth)
+			maxWidth = i->getWidth();
+	}
+	return maxWidth;
 }
 
 void VerticalShape::generatePostScript(std::ostream& os) const
@@ -309,12 +328,23 @@ HorizontalShape::HorizontalShape(initializer_list<shared_ptr<Shape>> i)
 
 double HorizontalShape::getHeight() const
 {
-	return 0.0;
+	double maxHeight = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getHeight() > maxHeight)
+			maxHeight = i->getHeight();
+	}
+	return maxHeight;
 }
 
 double HorizontalShape::getWidth() const
 {
-	return 0.0;
+	double totalWidth = 0;
+	for (auto i : _shapes)
+	{
+		totalWidth += i->getWidth();
+	}
+	return totalWidth;
 }
 
 void HorizontalShape::generatePostScript(std::ostream& os) const

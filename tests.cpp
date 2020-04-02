@@ -210,50 +210,87 @@ TEST_CASE("RotatedShape getHeight and getWidth")
 	}
 }
 
-/*
+TEST_CASE("ScaledShape getHeight and getWidth")
+{
 	SECTION("ScaledShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle(3, 4), scaled vertically by factor of 3");
+		REQUIRE(makeScaledShape(makeRectangle(3, 4), 1, 3)->getHeight() == 12);
+
+		INFO("Circle(5), scaled vertically by factor of 5");
+		REQUIRE(makeScaledShape(makeCircle(5), 1, 5)->getHeight() == 50);
 	}
 
 	SECTION("ScaledShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+		INFO("Rectangle(3, 4), scaled horizontally by factor of 3");
+		REQUIRE(makeScaledShape(makeRectangle(3, 4), 3, 1)->getWidth() == 9);
 
+		INFO("Triangle(5), scaled vertically by factor of 5");
+		REQUIRE(makeScaledShape(makeTriangle(5), 7, 1)->getWidth() == 35);
+	}
+}
+	
+TEST_CASE("LayeredShape getHeight and getWidth")
+{
 	SECTION("LayeredShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle height 4, circle height 10");
+		REQUIRE(makeLayeredShape({ makeRectangle(3, 4), makeCircle(5) })->getHeight() == 10);
+
+		INFO("Rectangle height 200, circle height 50");
+		REQUIRE(makeLayeredShape({ makeRectangle(50, 200), makeCircle(25) })->getHeight() == 200);
 	}
 
 	SECTION("LayeredShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+		INFO("Rectangle width 3, circle width 10");
+		REQUIRE(makeLayeredShape({ makeRectangle(3, 4), makeCircle(5) })->getWidth() == 10);
 
-	SECTION("LayeredShape getHeight")
-	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle width 51, circle width 50");
+		REQUIRE(makeLayeredShape({ makeRectangle(51, 200), makeCircle(25) })->getWidth() == 51);
 	}
+}
 
+TEST_CASE("VerticalShape getHeight and getWidth")
+{
 	SECTION("VerticalShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle height 4, circle height 10, rectangle height 20");
+		REQUIRE(makeVerticalShape({ makeRectangle(3, 4), makeCircle(5),
+					makeRectangle(5, 20) })->getHeight() == 34);
+
+		INFO("Circle height 20, circle height 73");
+		REQUIRE(makeVerticalShape({ makeCircle(10), makeCircle(36.5) })->getHeight() == 93);
 	}
 
 	SECTION("VerticalShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+		INFO("Rectangle width 3, circle width 10");
+		REQUIRE(makeVerticalShape({ makeRectangle(3, 4), makeCircle(5) })->getWidth() == 10);
 
+		INFO("Rectangle width 51, circle width 50");
+		REQUIRE(makeVerticalShape({ makeRectangle(51, 200), makeCircle(25) })->getWidth() == 51);
+	}
+}
+
+TEST_CASE("HorizontalShape getHeight and getWidth")
+{
 	SECTION("HorizontalShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle height 4, circle height 10");
+		REQUIRE(makeHorizontalShape({ makeRectangle(3, 4), makeCircle(5) })->getHeight() == 10);
+
+		INFO("Rectangle height 200, circle height 50");
+		REQUIRE(makeHorizontalShape({ makeRectangle(50, 200), makeCircle(25) })->getHeight() == 200);
 	}
 
 	SECTION("HorizontalShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle width 35, circle width 25");
+		REQUIRE(makeHorizontalShape({ makeRectangle(35, 20), makeCircle(12.5) })->getWidth() == 60);
+
+		INFO("Circle width 30, circle width 20");
+		REQUIRE(makeHorizontalShape({ makeCircle(15), makeCircle(10) })->getWidth() == 50);
 	}
 }
-*/
