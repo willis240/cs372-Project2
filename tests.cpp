@@ -273,15 +273,24 @@ TEST_CASE("VerticalShape getHeight and getWidth")
 		REQUIRE(makeVerticalShape({ makeRectangle(51, 200), makeCircle(25) })->getWidth() == 51);
 	}
 }
-	/*
+
+TEST_CASE("HorizontalShape getHeight and getWidth")
+{
 	SECTION("HorizontalShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle height 4, circle height 10");
+		REQUIRE(makeHorizontalShape({ makeRectangle(3, 4), makeCircle(5) })->getHeight() == 10);
+
+		INFO("Rectangle height 200, circle height 50");
+		REQUIRE(makeHorizontalShape({ makeRectangle(50, 200), makeCircle(25) })->getHeight() == 200);
 	}
 
 	SECTION("HorizontalShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle width 35, circle width 25");
+		REQUIRE(makeHorizontalShape({ makeRectangle(35, 20), makeCircle(12.5) })->getWidth() == 60);
+
+		INFO("Circle width 30, circle width 20");
+		REQUIRE(makeHorizontalShape({ makeCircle(15), makeCircle(10) })->getWidth() == 50);
 	}
 }
-*/

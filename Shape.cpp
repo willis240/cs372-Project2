@@ -326,12 +326,23 @@ HorizontalShape::HorizontalShape(initializer_list<shared_ptr<Shape>> i)
 
 double HorizontalShape::getHeight() const
 {
-	return 0.0;
+	double maxHeight = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getHeight() > maxHeight)
+			maxHeight = i->getHeight();
+	}
+	return maxHeight;
 }
 
 double HorizontalShape::getWidth() const
 {
-	return 0.0;
+	double totalWidth = 0;
+	for (auto i : _shapes)
+	{
+		totalWidth += i->getWidth();
+	}
+	return totalWidth;
 }
 
 void HorizontalShape::generatePostScript(std::ostream& os) const
