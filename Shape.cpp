@@ -225,8 +225,6 @@ double RotatedShape::getHeight() const
 		return _s->getWidth();
 	if (_a == 180)
 		return _s->getHeight();
-
-	return 0.0;
 }
 
 double RotatedShape::getWidth() const
@@ -235,8 +233,6 @@ double RotatedShape::getWidth() const
 		return _s->getHeight();
 	if (_a == 180)
 		return _s->getWidth();
-
-	return 0.0;
 }
 
 void RotatedShape::generatePostScript(std::ostream& os) const

@@ -210,17 +210,29 @@ TEST_CASE("RotatedShape getHeight and getWidth")
 	}
 }
 
-/*
+TEST_CASE("ScaledShape getHeight and getWidth")
+{
 	SECTION("ScaledShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle(3, 4), scaled vertically by factor of 3");
+		REQUIRE(makeScaledShape(makeRectangle(3, 4), 1, 3)->getHeight() == 12);
+
+		INFO("Circle(5), scaled vertically by factor of 5");
+		REQUIRE(makeScaledShape(makeCircle(5), 1, 5)->getHeight() == 50);
 	}
 
 	SECTION("ScaledShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
+		INFO("Rectangle(3, 4), scaled horizontally by factor of 3");
+		REQUIRE(makeScaledShape(makeRectangle(3, 4), 3, 1)->getWidth() == 9);
 
+		INFO("Triangle(5), scaled vertically by factor of 5");
+		REQUIRE(makeScaledShape(makeTriangle(5), 7, 1)->getWidth() == 35);
+	}
+}
+	
+TEST_CASE("LayeredShape getHeight and getWidth")
+{
 	SECTION("LayeredShape getHeight")
 	{
 		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -230,12 +242,8 @@ TEST_CASE("RotatedShape getHeight and getWidth")
 	{
 		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
-
-	SECTION("LayeredShape getHeight")
-	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	}
-
+}
+/*
 	SECTION("VerticalShape getHeight")
 	{
 		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
