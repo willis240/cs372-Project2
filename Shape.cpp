@@ -167,6 +167,8 @@ double Triangle::getWidth() const
 
 void Triangle::generatePostScript(std::ostream& os) const
 {
+	os << " gsave -" << _length / 2 << " -" << (_length / 2) * (sqrt(3.0)) << " tanslate newpath 0 0 moveto " << _length;
+	os << " 0 lineto " << _length / 2 << " " << (_length / 2) * (sqrt(3.0)) << " lineto closepath stroke grestore \n";
 }
 
 Custom::Custom(double radius): _radius(radius){}
@@ -239,6 +241,9 @@ double RotatedShape::getWidth() const
 
 void RotatedShape::generatePostScript(std::ostream& os) const
 {
+	os << " gsave " << _a << " rotate ";
+	_s->generatePostScript(os);
+	os << " grestore \n";
 }
 
 ScaledShape::ScaledShape(std::shared_ptr<Shape> s, double sx, double sy): _s(s), _sx(sx), _sy(sy){}
@@ -255,6 +260,7 @@ double ScaledShape::getWidth() const
 
 void ScaledShape::generatePostScript(std::ostream& os) const
 {
+
 }
 
 LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
@@ -287,6 +293,10 @@ double LayeredShape::getWidth() const
 
 void LayeredShape::generatePostScript(std::ostream& os) const
 {
+	os << " gsave ";
+	for (const auto& shape : _shapes)
+		shape->generatePostScript(os);
+	os << " grestore \n";
 }
 
 VerticalShape::VerticalShape(initializer_list<shared_ptr<Shape>> i)
@@ -318,6 +328,27 @@ double VerticalShape::getWidth() const
 
 void VerticalShape::generatePostScript(std::ostream& os) const
 {
+	os << " gsave ";
+
+	vector<double> heights{};
+	double totalHeight = 0;
+	int numberOfShapes = 0;
+
+	for (const auto shape : _shapes) {
+		double temp = shape->getHeight();
+		totalHeight += temp;
+		heights.push_back(temp);
+		++numberOfShapes;
+	}
+
+	os << " 0 " << totalHeight / 2.0 << " translate ";
+	for (int i = 0; i < numberOfShapes; ++i) {
+		os << " 0 -" << heights[i] / 2.0 << " translate \n";
+		_shapes[i]->generatePostScript(os);
+		os << " 0 -" << heights[i] / 2.0 << " translate \n";
+	}
+
+	os << " grestore \n";
 }
 
 HorizontalShape::HorizontalShape(initializer_list<shared_ptr<Shape>> i)
@@ -349,6 +380,27 @@ double HorizontalShape::getWidth() const
 
 void HorizontalShape::generatePostScript(std::ostream& os) const
 {
+	os << " gsave ";
+
+	vector<double> widths{};
+	double totalWidth = 0;
+	int numberOfShapes = 0;
+
+	for (const auto shape : _shapes) {
+		double temp = shape->getWidth();
+		totalWidth += temp;
+		widths.push_back(temp);
+		++numberOfShapes;
+	}
+
+	os << " 0 " << totalWidth / 2.0 << " translate ";
+	for (int i = 0; i < numberOfShapes; ++i) {
+		os << " 0 -" << widths[i] / 2.0 << " translate \n";
+		_shapes[i]->generatePostScript(os);
+		os << " 0 -" << widths[i] / 2.0 << " translate \n";
+	}
+
+	os << " grestore \n";
 }
 
 
