@@ -294,3 +294,19 @@ TEST_CASE("HorizontalShape getHeight and getWidth")
 		REQUIRE(makeHorizontalShape({ makeCircle(15), makeCircle(10) })->getWidth() == 50);
 	}
 }
+
+TEST_CASE("Complex Shapes getHeight and getWidth")
+{
+	SECTION("Complex Shapes getHeight")
+	{
+		REQUIRE(makeVerticalShape({ makeHorizontalShape({ makeRectangle(3, 4),
+					makeCircle(5) }), makeHorizontalShape({ makeRectangle(20, 40),
+					makeRectangle(30, 50)}) })->getHeight() == 10 + 50);
+	}
+
+	SECTION("Complex Shapes getWidth")
+	{
+		REQUIRE(makeLayeredShape({ makeHorizontalShape({ makeRectangle(17, 27), makeCircle(15) }),
+					makeVerticalShape({ makeCircle(25), makeCircle(15) }) })->getWidth() == 25 * 2);
+	}
+}
