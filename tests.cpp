@@ -235,12 +235,20 @@ TEST_CASE("LayeredShape getHeight and getWidth")
 {
 	SECTION("LayeredShape getHeight")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle height 4, circle height 10");
+		REQUIRE(makeLayeredShape({ makeRectangle(3, 4), makeCircle(5) })->getHeight() == 10);
+
+		INFO("Rectangle height 200, circle height 50");
+		REQUIRE(makeLayeredShape({ makeRectangle(50, 200), makeCircle(25) })->getHeight() == 200);
 	}
 
 	SECTION("LayeredShape getWidth")
 	{
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		INFO("Rectangle width 3, circle width 10")
+		REQUIRE(makeLayeredShape({ makeRectangle(3, 4), makeCircle(5) })->getWidth() == 10);
+
+		INFO("Rectangle width 51, circle width 50");
+		REQUIRE(makeLayeredShape({ makeRectangle(51, 200), makeCircle(25) })->getWidth() == 51);
 	}
 }
 /*

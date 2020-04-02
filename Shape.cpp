@@ -263,12 +263,24 @@ LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
 
 double LayeredShape::getHeight() const
 {
-	return 0.0;
+	double maxHeight = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getHeight() > maxHeight)
+			maxHeight = i->getHeight();
+	}
+	return maxHeight;
 }
 
 double LayeredShape::getWidth() const
 {
-	return 0.0;
+	double maxWidth = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getWidth() > maxWidth)
+			maxWidth = i->getWidth();
+	}
+	return maxWidth;
 }
 
 void LayeredShape::generatePostScript(std::ostream& os) const
