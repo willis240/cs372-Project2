@@ -295,12 +295,23 @@ VerticalShape::VerticalShape(initializer_list<shared_ptr<Shape>> i)
 
 double VerticalShape::getHeight() const
 {
-	return 0.0;
+	double totalHeight = 0;
+	for (auto i : _shapes)
+	{
+		totalHeight += i->getHeight();
+	}
+	return totalHeight;
 }
 
 double VerticalShape::getWidth() const
 {
-	return 0.0;
+	double maxWidth = 0;
+	for (auto i : _shapes)
+	{
+		if (i->getWidth() > maxWidth)
+			maxWidth = i->getWidth();
+	}
+	return maxWidth;
 }
 
 void VerticalShape::generatePostScript(std::ostream& os) const
