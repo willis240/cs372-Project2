@@ -47,7 +47,6 @@ std::shared_ptr<Shape> makeCustom(double radius)
     return make_shared<Custom>(radius);
 }
 
-
 std::shared_ptr<Shape> makeRotatedShape(std::shared_ptr<Shape> s, Angle a)
 {
 	return make_shared<RotatedShape>(s,a);
@@ -87,6 +86,7 @@ double Circle::getWidth() const
 
 void Circle::generatePostScript(std::ostream& os) const 
 {
+	os << " gsave 0 0 " << _radius << " 0 360 arc stroke grestore \n";
 }
 
 Polygon::Polygon(int numSides, double length): _numSides(numSides), _length(length){}
@@ -117,6 +117,7 @@ double Polygon::getWidth() const
 
 void Polygon::generatePostScript(std::ostream& os) const
 {
+
 }
 
 Rectangle::Rectangle(double width, double height): _width(width), _height(height){}
@@ -133,6 +134,9 @@ double Rectangle::getWidth() const
 
 void Rectangle::generatePostScript(std::ostream& os) const
 {
+	os << " gsave -" << _width/2 << " -" << _height/2 << " translate newpath 0 0 moveto "; 
+	os << _width << " 0 lineto " << _width << " " << _height << " lineto 0 " << _height << " lineto ";
+	os << " closepath stroke grestore \n";		
 }
 
 Spacer::Spacer(double width, double height): _width(width), _height(height){}
@@ -147,9 +151,7 @@ double Spacer::getWidth() const
 	return _width;
 }
 
-void Spacer::generatePostScript(std::ostream& os) const
-{
-}
+void Spacer::generatePostScript(std::ostream& os) const {} //Empty on purpose. A spacer should not draw anything.
 
 Triangle::Triangle(double length): _length(length){}
 
