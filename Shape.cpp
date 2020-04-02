@@ -117,7 +117,12 @@ double Polygon::getWidth() const
 
 void Polygon::generatePostScript(std::ostream& os) const
 {
-
+	os << " gsave ";
+	double degree = (double)((180 * (_numSides - 2)) / _numSides);
+	os << " -" << getHeight() / 2 << _length / 2 << " translate movepath 0 0 moveto ";
+	for (int i = 0; i < _numSides - 1; ++i)
+		os << degree << " rotate " << _length << " 0 lineto ";
+	os << " closepath stroke grestore ";
 }
 
 Rectangle::Rectangle(double width, double height): _width(width), _height(height){}
