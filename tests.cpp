@@ -162,6 +162,34 @@ TEST_CASE("Triangle getHeight and getWidth")
 		REQUIRE(makeTriangle(17)->getWidth() == (17 * sin(M_PI * (3 - 1.0) / (2.0 * 3))) / sin(M_PI / 3));
 	}
 }
+TEST_CASE("Custom getHeight and getWidth functions")
+{
+
+    SECTION("Custom getHeight"){
+
+        INFO("Radius 4 -> Height 8")
+            REQUIRE(makeCustom(4)->getHeight() == 8);
+
+        INFO("Radius 6 -> Height 12")
+            REQUIRE(makeCustom(6)->getHeight() == 12);
+
+        INFO("Radius 37 -> Height 74")
+            REQUIRE(makeCustom(37)->getHeight() == 74);
+    }
+
+    SECTION("Custom getWidth"){
+
+        INFO("Radius 20 -> Width 40");
+            REQUIRE(makeCustom(20)->getWidth() == 40);
+
+        INFO("Radius 16 -> Width 32");
+            REQUIRE(makeCustom(16)->getWidth() == 32);
+
+        INFO("Radius 103 -> Width 206");
+            REQUIRE(makeCustom(103)->getWidth() == 206);
+    }
+}
+
 
 TEST_CASE("RotatedShape getHeight and getWidth")
 {
@@ -183,7 +211,11 @@ TEST_CASE("RotatedShape getHeight and getWidth")
 		REQUIRE(makeRotatedShape(makeTriangle(17), Angle::R270)->getHeight() == 
 			makeTriangle(17)->getWidth());
 
-		INFO("Rectangle(17, 34), rotated 180 degrees");
+		INFO("Custom(15), rotated 90 degrees");
+        REQUIRE(makeRotatedShape(makeCustom(15), Angle::R90)->getHeight() == 30);
+
+
+        INFO("Rectangle(17, 34), rotated 180 degrees");
 		REQUIRE(makeRotatedShape(makeRectangle(17, 34), Angle::R180)->getHeight() == 34);
 	}
 
@@ -204,6 +236,9 @@ TEST_CASE("RotatedShape getHeight and getWidth")
 		INFO("Triangle(17, 34), rotated 270 degrees");
 		REQUIRE(makeRotatedShape(makeTriangle(17), Angle::R270)->getWidth() == 
 			makeTriangle(17)->getHeight());
+
+        INFO("Custom(15), rotated 90 degrees");
+        REQUIRE(makeRotatedShape(makeCustom(15), Angle::R90)->getWidth() == 30);
 
 		INFO("Rectangle(17, 34), rotated 180 degrees");
 		REQUIRE(makeRotatedShape(makeRectangle(17, 34), Angle::R180)->getWidth() == 17);
