@@ -350,7 +350,7 @@ void VerticalShape::generatePostScript(std::ostream& os) const
 
 	os << " 0 " << totalHeight / 2.0 << " translate ";
 	for (int i = 0; i < numberOfShapes; ++i) {
-		os << " 0 -" << heights[i] / 2.0 << " translate \n";
+		os << "0 -" << heights[i] / 2.0 << " translate \n";
 		_shapes[i]->generatePostScript(os);
 		os << " 0 -" << heights[i] / 2.0 << " translate \n";
 	}
@@ -400,11 +400,11 @@ void HorizontalShape::generatePostScript(std::ostream& os) const
 		++numberOfShapes;
 	}
 
-	os << " 0 " << totalWidth / 2.0 << " translate ";
+	os << " " << totalWidth / 2.0 << " 0 translate ";
 	for (int i = 0; i < numberOfShapes; ++i) {
-		os << " 0 -" << widths[i] / 2.0 << " translate \n";
+		os << " -" << widths[i] / 2.0 << " 0 translate \n";
 		_shapes[i]->generatePostScript(os);
-		os << " 0 -" << widths[i] / 2.0 << " translate \n";
+		os << " -" << widths[i] / 2.0 << " 0 translate \n";
 	}
 
 	os << " grestore \n";
