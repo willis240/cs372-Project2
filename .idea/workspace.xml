@@ -13,7 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="283ba64c-5a9a-4e88-9a59-76f262e7f570" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shape.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Shape.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585622250233</updated>
-      <workItem from="1585622251928" duration="10456000" />
+      <workItem from="1585622251928" duration="13633000" />
+      <workItem from="1585942489749" duration="231000" />
     </task>
     <task id="LOCAL-00001" summary="tester">
       <created>1585622320037</created>
@@ -79,7 +80,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585701847530</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add Custom Shape test all pass">
+      <created>1585803098831</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585803098831</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,49 +98,54 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="tester" />
     <MESSAGE value="Add Custom Shape" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Custom Shape" />
+    <MESSAGE value="Add Custom Shape test all pass" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Custom Shape test all pass" />
   </component>
   <component name="WindowStateProjectService">
     <state x="132" y="122" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585622426194">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
     <state x="132" y="122" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.32.1600.868@0.32.1600.868" timestamp="1585622426194" />
-    <state x="273" y="39" width="789" height="826" key="CommitChangelistDialog2" timestamp="1585701847442">
+    <state x="273" y="34" width="789" height="826" key="CommitChangelistDialog2" timestamp="1585803098750">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state x="273" y="39" width="789" height="826" key="CommitChangelistDialog2/0.32.1600.868@0.32.1600.868" timestamp="1585701847442" />
-    <state x="305" y="108" width="1125" height="665" key="DiffContextDialog" timestamp="1585800497274">
+    <state x="273" y="34" width="789" height="826" key="CommitChangelistDialog2/0.32.1600.868@0.32.1600.868" timestamp="1585803098750" />
+    <state x="305" y="98" width="1125" height="665" key="DiffContextDialog" timestamp="1585804807366">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state x="305" y="108" width="1125" height="665" key="DiffContextDialog/0.32.1600.868@0.32.1600.868" timestamp="1585800497274" />
+    <state x="305" y="98" width="1125" height="665" key="DiffContextDialog/0.32.1600.868@0.32.1600.868" timestamp="1585804807366" />
     <state x="456" y="207" width="424" height="490" key="FileChooserDialogImpl" timestamp="1585622485796">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
     <state x="456" y="207" width="424" height="490" key="FileChooserDialogImpl/0.32.1600.868@0.32.1600.868" timestamp="1585622485796" />
-    <state width="1283" height="215" key="GridCell.Tab.0.bottom" timestamp="1585801944828">
+    <state width="1283" height="215" key="GridCell.Tab.0.bottom" timestamp="1585855258196">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state width="1283" height="215" key="GridCell.Tab.0.bottom/0.32.1600.868@0.32.1600.868" timestamp="1585801944828" />
-    <state width="1283" height="215" key="GridCell.Tab.0.center" timestamp="1585801944827">
+    <state width="1283" height="215" key="GridCell.Tab.0.bottom/0.32.1600.868@0.32.1600.868" timestamp="1585855258196" />
+    <state width="1283" height="215" key="GridCell.Tab.0.center" timestamp="1585855258195">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state width="1283" height="215" key="GridCell.Tab.0.center/0.32.1600.868@0.32.1600.868" timestamp="1585801944827" />
-    <state width="1283" height="215" key="GridCell.Tab.0.left" timestamp="1585801944826">
+    <state width="1283" height="215" key="GridCell.Tab.0.center/0.32.1600.868@0.32.1600.868" timestamp="1585855258195" />
+    <state width="1283" height="215" key="GridCell.Tab.0.left" timestamp="1585855258195">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state width="1283" height="215" key="GridCell.Tab.0.left/0.32.1600.868@0.32.1600.868" timestamp="1585801944826" />
-    <state width="1283" height="215" key="GridCell.Tab.0.right" timestamp="1585801944828">
+    <state width="1283" height="215" key="GridCell.Tab.0.left/0.32.1600.868@0.32.1600.868" timestamp="1585855258195" />
+    <state width="1283" height="215" key="GridCell.Tab.0.right" timestamp="1585855258196">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state width="1283" height="215" key="GridCell.Tab.0.right/0.32.1600.868@0.32.1600.868" timestamp="1585801944828" />
-    <state x="465" y="204" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1585701863270">
+    <state width="1283" height="215" key="GridCell.Tab.0.right/0.32.1600.868@0.32.1600.868" timestamp="1585855258196" />
+    <state x="465" y="199" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1585803102513">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state x="465" y="204" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1600.868@0.32.1600.868" timestamp="1585701863270" />
-    <state x="469" y="344" width="402" height="166" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585803070314">
+    <state x="465" y="199" width="800" height="534" key="Vcs.Push.Dialog.v2/0.32.1600.868@0.32.1600.868" timestamp="1585803102513" />
+    <state x="555" y="293" key="com.intellij.ide.util.TipDialog" timestamp="1585942490993">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
-    <state x="469" y="344" width="402" height="166" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.32.1600.868@0.32.1600.868" timestamp="1585803070314" />
+    <state x="555" y="293" key="com.intellij.ide.util.TipDialog/0.32.1600.868@0.32.1600.868" timestamp="1585942490993" />
+    <state x="469" y="319" width="402" height="166" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585942720768">
+      <screen x="0" y="32" width="1600" height="868" />
+    </state>
+    <state x="469" y="319" width="402" height="166" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.32.1600.868@0.32.1600.868" timestamp="1585942720768" />
     <state x="480" y="108" width="672" height="676" key="search.everywhere.popup" timestamp="1585696793298">
       <screen x="0" y="32" width="1600" height="868" />
     </state>

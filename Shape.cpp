@@ -265,7 +265,9 @@ double ScaledShape::getWidth() const
 
 void ScaledShape::generatePostScript(std::ostream& os) const
 {
-
+    os << "gsave " << _sx << " " << _sy << " scale ";
+    _s->generatePostScript(os);
+    os << "grestore ";
 }
 
 LayeredShape::LayeredShape(initializer_list<shared_ptr<Shape>> i)
