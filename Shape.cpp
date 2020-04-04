@@ -118,10 +118,10 @@ double Polygon::getWidth() const
 void Polygon::generatePostScript(std::ostream& os) const
 {
 	os << " gsave ";
-	double degree = (double)((180 * (_numSides - 2)) / _numSides);
-	os << " -" << getHeight() / 2 << _length / 2 << " translate movepath 0 0 moveto ";
+	double degree = 180 - (double)((180 * (_numSides - 2)) / _numSides);
+	os << " newpath " << _length << " 0 moveto ";
 	for (int i = 0; i < _numSides - 1; ++i)
-		os << degree << " rotate " << _length << " 0 lineto ";
+		os << degree << " rotate " << _length << " 0 lineto \n";
 	os << " closepath stroke grestore ";
 }
 
