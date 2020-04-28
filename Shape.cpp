@@ -342,7 +342,32 @@ std::vector<std::shared_ptr<Shape>> VerticalShape::getShapes() const
 
 void VerticalShape::moveToPositionForShape(int& i, std::ostream & os) const
 {
+	vector<double> shapeHeights;
+	double totalHeight = 0;
+	int numShapes = _shapes.size();
+	double shapeHeight = 0;
 
+	for (const auto& shape : _shapes)
+	{
+		shapeHeight = shape->getHeight();
+		totalHeight += shapeHeight;
+		shapeHeights.push_back(shapeHeight);
+	}
+
+	os << "0" << totalHeight / 2.0 << " moveto ";
+	if (i > 0)
+	{
+		for (size_t ii = 0; ii < i - 1; ++ii)
+		{
+			os << " 0 -" << shapeHeights[ii] << " rmoveto " << std::endl;
+		}
+
+		os << " 0 -" << shapeHeights[i] / 2.0 << " rmoveto ";
+	}
+	else
+	{
+		os << " 0 -" << shapeHeights[0] / 2.0 << " rmoveto ";
+	}
 }
 
 HorizontalShape::HorizontalShape(initializer_list<shared_ptr<Shape>> i)
