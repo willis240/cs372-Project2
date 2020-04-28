@@ -124,32 +124,50 @@ private:
     double _sy;
 };
 
-class LayeredShape : public Shape {
+class CompositeShape : public Shape {
+public:
+    virtual double getHeight() const = 0;
+    virtual double getWidth() const = 0;
+    virtual void moveToPositionForShape(int& i, std::ostream & os) const = 0;
+    void generatePostScript(std::ostream& os) const;
+protected:
+    virtual std::vector<std::shared_ptr<Shape>> getShapes() const = 0;
+private:
+    std::vector<std::shared_ptr<Shape>> _shapes;
+};
+
+class LayeredShape : public CompositeShape {
 public:
     LayeredShape(std::initializer_list<std::shared_ptr<Shape>> i);
     double getHeight() const override;
     double getWidth() const override;
-    void generatePostScript(std::ostream& os) const override;
+    void moveToPositionForShape(int& i, std::ostream & os) const override;
+protected:
+    std::vector<std::shared_ptr<Shape>> getShapes() const override;
 private:
     std::vector<std::shared_ptr<Shape>> _shapes;
 };
 
-class VerticalShape : public Shape {
+class VerticalShape : public CompositeShape {
 public:
     VerticalShape(std::initializer_list<std::shared_ptr<Shape>> i);
     double getHeight() const override;
     double getWidth() const override;
-    void generatePostScript(std::ostream& os) const override;
+    void moveToPositionForShape(int& i, std::ostream & os) const override;
+protected:
+    std::vector<std::shared_ptr<Shape>> getShapes() const override;
 private:
     std::vector<std::shared_ptr<Shape>> _shapes;
 };
 
-class HorizontalShape : public Shape {
+class HorizontalShape : public CompositeShape {
 public:
     HorizontalShape(std::initializer_list<std::shared_ptr<Shape>> i);
     double getHeight() const override;
     double getWidth() const override;
-    void generatePostScript(std::ostream& os) const override;
+    void moveToPositionForShape(int& i, std::ostream & os) const override;
+protected:
+    std::vector<std::shared_ptr<Shape>> getShapes() const override;
 private:
     std::vector<std::shared_ptr<Shape>> _shapes;
 };

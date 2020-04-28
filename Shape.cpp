@@ -298,12 +298,14 @@ double LayeredShape::getWidth() const
 	return maxWidth;
 }
 
-void LayeredShape::generatePostScript(std::ostream& os) const
+std::vector<std::shared_ptr<Shape>> LayeredShape::getShapes() const
 {
-	os << " gsave ";
-	for (const auto& shape : _shapes)
-		shape->generatePostScript(os);
-	os << " grestore \n";
+	return _shapes;
+}
+
+void LayeredShape::moveToPositionForShape(int& i, std::ostream & os) const
+{
+	os << " 0 0 moveto";
 }
 
 VerticalShape::VerticalShape(initializer_list<shared_ptr<Shape>> i)
@@ -333,29 +335,14 @@ double VerticalShape::getWidth() const
 	return maxWidth;
 }
 
-void VerticalShape::generatePostScript(std::ostream& os) const
+std::vector<std::shared_ptr<Shape>> VerticalShape::getShapes() const
 {
-	os << " gsave ";
+	return _shapes;
+}
 
-	vector<double> heights{};
-	double totalHeight = 0;
-	int numberOfShapes = 0;
+void VerticalShape::moveToPositionForShape(int& i, std::ostream & os) const
+{
 
-	for (const auto shape : _shapes) {
-		double temp = shape->getHeight();
-		totalHeight += temp;
-		heights.push_back(temp);
-		++numberOfShapes;
-	}
-
-	os << " 0 " << totalHeight / 2.0 << " translate ";
-	for (int i = 0; i < numberOfShapes; ++i) {
-		os << "0 -" << heights[i] / 2.0 << " translate \n";
-		_shapes[i]->generatePostScript(os);
-		os << " 0 -" << heights[i] / 2.0 << " translate \n";
-	}
-
-	os << " grestore \n";
 }
 
 HorizontalShape::HorizontalShape(initializer_list<shared_ptr<Shape>> i)
@@ -385,29 +372,23 @@ double HorizontalShape::getWidth() const
 	return totalWidth;
 }
 
-void HorizontalShape::generatePostScript(std::ostream& os) const
+std::vector<std::shared_ptr<Shape>> HorizontalShape::getShapes() const
 {
-	os << " gsave ";
-
-	vector<double> widths{};
-	double totalWidth = 0;
-	int numberOfShapes = 0;
-
-	for (const auto shape : _shapes) {
-		double temp = shape->getWidth();
-		totalWidth += temp;
-		widths.push_back(temp);
-		++numberOfShapes;
-	}
-
-	os << " " << totalWidth / 2.0 << " 0 translate ";
-	for (int i = 0; i < numberOfShapes; ++i) {
-		os << " -" << widths[i] / 2.0 << " 0 translate \n";
-		_shapes[i]->generatePostScript(os);
-		os << " -" << widths[i] / 2.0 << " 0 translate \n";
-	}
-
-	os << " grestore \n";
+	return _shapes;
 }
 
+void HorizontalShape::moveToPositionForShape(int & i, std::ostream & os) const
+{
 
+}
+
+void CompositeShape::generatePostScript(std::ostream& os) const
+{
+	std::string ps;
+	for (auto i = 0; i < getShapes().size(); ++i)
+	{
+		moveToPositionForShape(i, os);
+		getShapes()[i]->generatePostScript(os);
+		std::cout << std::endl;
+	}
+}
