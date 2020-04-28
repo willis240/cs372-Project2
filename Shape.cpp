@@ -404,7 +404,31 @@ std::vector<std::shared_ptr<Shape>> HorizontalShape::getShapes() const
 
 void HorizontalShape::moveToPositionForShape(int & i, std::ostream & os) const
 {
+	vector<double> shapeWidths;
+	double totalWidth = 0;
+	int numShapes = _shapes.size();
+	double shapeWidth = 0;
 
+	for (const auto& shape : _shapes)
+	{
+		shapeWidth = shape->getWidth();
+		totalWidth += shapeWidth;
+		shapeWidths.push_back(shapeWidth);
+	}
+
+	os << "0 " << totalWidth / 2.0 << " moveto ";
+	if (i > 0)
+	{
+		for (size_t ii = 0; ii < i - 1; ++ii)
+		{
+			os << " 0 -" << shapeWidths[ii] << " rmoveto " << std::endl;
+		}
+		os << " 0 -" << shapeWidths[i] / 2.0 << " rmoveto ";
+	}
+	else
+	{
+		os << " 0 -" << shapeWidths[0] / 2.0 << " rmoveto ";
+	}
 }
 
 void CompositeShape::generatePostScript(std::ostream& os) const
